@@ -13,7 +13,7 @@ public class SmartCartServiceTest {
     public void name() throws Exception {
         String wrongKey = "FFFFFFFFFFFA";
         try {
-            service = new SmartCartServiceImpl(60, wrongKey);
+            service = new SmartCartServiceImpl(60, wrongKey, 0);
             service.erase();
             Assert.fail();
         } catch (Exception e) {
@@ -23,7 +23,7 @@ public class SmartCartServiceTest {
 
     @Test
     public void test() throws Exception {
-        service = new SmartCartServiceImpl(60, "FFFFFFFFFFFF");
+        service = new SmartCartServiceImpl(60, "FFFFFFFFFFFF", 0);
 
         service.erase();
 
