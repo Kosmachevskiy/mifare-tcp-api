@@ -7,13 +7,13 @@ import org.junit.Test;
 @Ignore
 public class SmartCartServiceTest {
 
-    private SmartCartService service;
+    private SmartCartServiceImpl service;
 
     @Test
     public void name() throws Exception {
         String wrongKey = "FFFFFFFFFFFA";
         try {
-            service = new SmartCartService(60, wrongKey);
+            service = new SmartCartServiceImpl(60, wrongKey);
             service.erase();
             Assert.fail();
         } catch (Exception e) {
@@ -23,10 +23,11 @@ public class SmartCartServiceTest {
 
     @Test
     public void test() throws Exception {
-        service = new SmartCartService(60, "FFFFFFFFFFFF");
+        service = new SmartCartServiceImpl(60, "FFFFFFFFFFFF");
 
         service.erase();
-        byte[] read = service.read();
+
+        byte[] read = service.readBytes();
         Assert.assertArrayEquals(new byte[0], read);
 
         String data = "TEST_DATA_123";
@@ -40,7 +41,7 @@ public class SmartCartServiceTest {
         Assert.assertEquals("1", new String(service.read()));
 
         service.write("String");
-        String s = service.readString();
+        String s = service.read();
         Assert.assertEquals("String", s);
 
         try {
